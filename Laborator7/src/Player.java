@@ -27,19 +27,24 @@ public class Player implements Runnable {
         this.name = name;
     }
 
-    public synchronized void extractToken(int n) {
-        extractedTokens.add(new Token(n));
+    public synchronized void extractToken(Token extracted) {
+        extractedTokens.add(Token extracted);
     }
 
     @Override
     public void run() {
         if (board.nrTokens > 0) {
             Random rand = new Random();
-            int n = rand.nextInt(board.nrTokens);
-            extractToken(n);
-            board.nrTokens--;
+            int n = rand.nextInt(board.nrTokens)+1;
+            /*am avut si o tentativa de a evita de a lua de doua ori acelasi token
+            if(!(board.tokenList.contains(n)))
+                while(!(board.tokenList.contains(n)))
+                    n = rand.nextInt(board.nrTokens);*/
             Token extracted = new Token(n);
+            extractToken(extracted); 
+            board.nrTokens--;
             board.tokenList.remove(extracted);
+            
             System.out.println(this.name + "a luat piesa" + n);
             if (board.nrTokens == 0)
                 System.out.println(this.name + " a castigat");
