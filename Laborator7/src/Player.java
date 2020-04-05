@@ -28,7 +28,7 @@ public class Player implements Runnable {
     }
 
     public synchronized void extractToken(Token extracted) {
-        extractedTokens.add(Token extracted);
+        extractedTokens.add(extracted);
     }
 
     @Override
